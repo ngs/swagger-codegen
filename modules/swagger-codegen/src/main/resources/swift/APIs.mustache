@@ -7,7 +7,7 @@
 import Foundation
 
 public class {{projectName}}API {
-    static let basePath = "{{basePath}}"
+    static var basePath = "{{basePath}}"
     static var credential: NSURLCredential?
     static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
 }
@@ -35,14 +35,14 @@ public class RequestBuilder<T> {
     let isBody: Bool
     let method: String
     let URLString: String
-    
+
     required public init(method: String, URLString: String, parameters: [String:AnyObject]?, isBody: Bool) {
         self.method = method
         self.URLString = URLString
         self.parameters = parameters
         self.isBody = isBody
     }
-    
+
     public func execute(completion: (response: Response<T>?, erorr: NSError?) -> Void) { }
 
     public func addHeader(#name: String, value: String) -> Self {
@@ -51,7 +51,7 @@ public class RequestBuilder<T> {
         }
         return self
     }
-    
+
     public func addCredential() -> Self {
         self.credential = {{projectName}}API.credential
         return self
